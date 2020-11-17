@@ -46,9 +46,9 @@ namespace NorthwindBase.Repository.Common
         /// </summary>
         /// <param name="predicate">要取得的Where條件。</param>
         /// <returns>取得第一筆符合條件的內容。</returns>
-        public TEntity Get(Expression<Func<TEntity, bool>> predicate)
+        public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbContext.Set<TEntity>().Where(predicate).FirstOrDefault();
+            return _dbContext.Set<TEntity>().Where(predicate);
         }
 
         /// <summary>

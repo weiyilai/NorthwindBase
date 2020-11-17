@@ -52,7 +52,7 @@
                 <td>@item.Region</td>
                 <td>@item.PostalCode</td>
                 <td>@item.Country</td>
-                <td>@Html.ActionLink("Detail", "Information", "Employee", new { id = item.EmployeeID }, null)</td>
+                <td>@Html.ActionLink("Detail", "Detail", "Employee", new { id = item.EmployeeID }, null)</td>
                 <td>@Html.ActionLink("Delete", null, new { id = item.EmployeeID }, new { id = "Link" + item.EmployeeID.ToString(), href = "javascript:void(0)", onclick = "Delete(" + item.EmployeeID + ")" })</td>
             </tr>
         }

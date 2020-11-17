@@ -16,11 +16,11 @@ namespace NorthwindBase.Repository.Common
         void Add(T entity);
 
         /// <summary>
-        /// 取得第一筆符合條件的內容。如果符合條件有多筆，也只取得第一筆。
+        /// 取得符合條件的內容。
         /// </summary>
         /// <param name="predicate">要取得的Where條件。</param>
         /// <returns>取得第一筆符合條件的內容。</returns>
-        T Get(Expression<Func<T, bool>> predicate);
+        IQueryable<T> Get(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// 取得Entity全部筆數的IQueryable。

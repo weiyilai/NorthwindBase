@@ -1,0 +1,94 @@
+﻿@model NorthwindBase.Web.Models.Employee.EmployeeModel
+
+@{
+    ViewBag.Title = "員工明細";
+    var filePath = "~/Scripts/Employee/Employee.js";
+    string modified = File.
+        GetLastWriteTime(Server.MapPath(filePath)).
+        ToString("yyyyMMddHHmmssfff");
+    var jsSrc = $"{filePath}?{modified}";
+}
+
+@section scripts {
+    <script src="@Url.Content(jsSrc)"></script>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form id="form-Detail">
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Photo</th>
+                <td>
+                    <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(Model.Photo)" />
+                </td>
+            </tr>
+            <tr>
+                <th>Employee ID</th>
+                <td>@Model.EmployeeID</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>@Html.TextBoxFor(m => m.LastName)</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>@Html.TextBoxFor(m => m.FirstName)</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>@Html.TextBoxFor(m => m.Title)</td>
+            </tr>
+            <tr>
+                <th>Title of Courtesy</th>
+                <td>@Html.TextBoxFor(m => m.TitleOfCourtesy)</td>
+            </tr>
+            <tr>
+                <th>Birth Date</th>
+                <td>@Html.TextBoxFor(m => m.BirthDate, "{0:yyyy/MM/dd}")</td>
+            </tr>
+            <tr>
+                <th>Hire Date</th>
+                <td>@Html.TextBoxFor(m => m.HireDate, "{0:yyyy/MM/dd}")</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>@Html.TextBoxFor(m => m.Address)</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>@Html.TextBoxFor(m => m.City)</td>
+            </tr>
+            <tr>
+                <th>Region</th>
+                <td>@Html.TextBoxFor(m => m.Region)</td>
+            </tr>
+            <tr>
+                <th>Postal Code</th>
+                <td>@Html.TextBoxFor(m => m.PostalCode)</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>@Html.TextBoxFor(m => m.Country)</td>
+            </tr>
+            <tr>
+                <th>Home Phone</th>
+                <td>@Html.TextBoxFor(m => m.HomePhone)</td>
+            </tr>
+            <tr>
+                <th>Extension</th>
+                <td>@Html.TextBoxFor(m => m.Extension)</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>@Html.TextAreaFor(m => m.Notes, 8, 200, null)</td>
+            </tr>
+        </tbody>
+    </table>    
+</form>
+<div style="text-align: right;">
+    <button id="SaveBtn">Save</button>
+    <button id="BackBtn">Back</button>
+</div>

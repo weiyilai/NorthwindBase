@@ -1,4 +1,6 @@
-﻿using NorthwindBase.Service.Employee;
+﻿using AutoMapper;
+using NorthwindBase.Dto.Employee;
+using NorthwindBase.Service.Employee;
 using NorthwindBase.Web.Models.Employee;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,19 @@ namespace NorthwindBase.Web.Controllers
             model.EmployeeList = _employeeService.GetAllEmployees();
 
             return View(model);
+        }
+
+        public ActionResult Detail(int id)
+        {
+            EmployeeModel model = new EmployeeModel();
+
+            var config = new MapperConfiguration(cfg =>
+                cfg.CreateMap<EmployeeDto, EmployeeModel>()
+            );
+            var mapper = config.CreateMapper();
+            var des = mapper.Map<EmployeeModel>(_employeeService.GetEmployee(id));
+            
+            return View(des);
         }
 
         public ActionResult Delete(int id)

@@ -55,6 +55,49 @@ namespace NorthwindBase.Service.Employee
         }
 
         /// <summary>
+        /// 取得指定員工資料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public EmployeeDto GetEmployee(int id)
+        {
+            using (EmployeeRepository employeeRepository = new EmployeeRepository(_dbEntities))
+            {
+                var query = employeeRepository.Get(q => q.EmployeeID == id);
+                if (query.Any())
+                {
+                    return query.
+                        Select(q => new EmployeeDto
+                        {
+                            EmployeeID = q.EmployeeID,
+                            LastName = q.LastName,
+                            FirstName = q.FirstName,
+                            Title = q.Title,
+                            TitleOfCourtesy = q.TitleOfCourtesy,
+                            BirthDate = q.BirthDate,
+                            HireDate = q.HireDate,
+                            Address = q.Address,
+                            City = q.City,
+                            Region = q.Region,
+                            PostalCode = q.PostalCode,
+                            Country = q.Country,
+                            HomePhone = q.HomePhone,
+                            Extension = q.Extension,
+                            Photo = q.Photo,
+                            Notes = q.Notes,
+                            ReportsTo = q.ReportsTo,
+                            PhotoPath = q.PhotoPath
+                        }).
+                        SingleOrDefault();
+                }
+                else
+                {
+                    return new EmployeeDto();
+                }
+            }
+        }
+
+        /// <summary>
         /// 刪除指定員工
         /// </summary>
         /// <param name="id"></param>
@@ -62,9 +105,13 @@ namespace NorthwindBase.Service.Employee
         {
             using (EmployeeRepository employeeRepository = new EmployeeRepository(_dbEntities))
             {
-                var entity = employeeRepository.Get(q => q.EmployeeID == id);
-                employeeRepository.Delete(entity);
-                employeeRepository.SaveChanges();
+                var query = employeeRepository.Get(q => q.EmployeeID == id);
+                if (query.Any())
+                {
+                    var entity = query.SingleOrDefault();
+                    employeeRepository.Delete(entity);
+                    employeeRepository.SaveChanges();
+                }
             }
         }
     }
