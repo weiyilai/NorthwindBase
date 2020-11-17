@@ -1,4 +1,5 @@
-﻿using NorthwindBase.Dto.Employee;
+﻿using AutoMapper;
+using NorthwindBase.Dto.Employee;
 using NorthwindBase.Model.Northwind;
 using NorthwindBase.Repository.Employee;
 using System;
@@ -12,6 +13,14 @@ namespace NorthwindBase.Service.Employee
     public class EmployeeService
     {
         private NorthwindEntities _dbEntities = new NorthwindEntities();
+        private IMapper _mapper;
+
+        public EmployeeService()
+        {
+            _mapper = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Employees, EmployeeDto>()
+            ).CreateMapper();
+        }
 
         /// <summary>
         /// 取得所有員工資料
@@ -25,27 +34,8 @@ namespace NorthwindBase.Service.Employee
 
                 if (query.Any())
                 {
-                    return query.Select(q => new EmployeeDto
-                    {
-                        EmployeeID = q.EmployeeID,
-                        LastName = q.LastName,
-                        FirstName = q.FirstName,
-                        Title = q.Title,
-                        TitleOfCourtesy = q.TitleOfCourtesy,
-                        BirthDate = q.BirthDate,
-                        HireDate = q.HireDate,
-                        Address = q.Address,
-                        City = q.City,
-                        Region = q.Region,
-                        PostalCode = q.PostalCode,
-                        Country = q.Country,
-                        HomePhone = q.HomePhone,
-                        Extension = q.Extension,
-                        Photo = q.Photo,
-                        Notes = q.Notes,
-                        ReportsTo = q.ReportsTo,
-                        PhotoPath = q.PhotoPath
-                    }).ToList();
+                    var des = _mapper.Map<List<EmployeeDto>>(query.ToList());
+                    return des;
                 }
                 else
                 {
@@ -66,29 +56,8 @@ namespace NorthwindBase.Service.Employee
                 var query = employeeRepository.Get(q => q.EmployeeID == id);
                 if (query.Any())
                 {
-                    return query.
-                        Select(q => new EmployeeDto
-                        {
-                            EmployeeID = q.EmployeeID,
-                            LastName = q.LastName,
-                            FirstName = q.FirstName,
-                            Title = q.Title,
-                            TitleOfCourtesy = q.TitleOfCourtesy,
-                            BirthDate = q.BirthDate,
-                            HireDate = q.HireDate,
-                            Address = q.Address,
-                            City = q.City,
-                            Region = q.Region,
-                            PostalCode = q.PostalCode,
-                            Country = q.Country,
-                            HomePhone = q.HomePhone,
-                            Extension = q.Extension,
-                            Photo = q.Photo,
-                            Notes = q.Notes,
-                            ReportsTo = q.ReportsTo,
-                            PhotoPath = q.PhotoPath
-                        }).
-                        SingleOrDefault();
+                    var des = _mapper.Map<EmployeeDto>(query.SingleOrDefault());
+                    return des;
                 }
                 else
                 {

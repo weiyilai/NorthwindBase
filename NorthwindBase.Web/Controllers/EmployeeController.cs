@@ -13,35 +13,49 @@ namespace NorthwindBase.Web.Controllers
     public class EmployeeController : Controller
     {
         private EmployeeService _employeeService;
+        private IMapper _mapper;
 
+        /// <summary>
+        /// 建構子
+        /// </summary>
         public EmployeeController()
         {
             _employeeService = new EmployeeService();
+            _mapper = new MapperConfiguration(cfg =>
+                cfg.CreateMap<EmployeeDto, EmployeeModel>()
+            ).CreateMapper();
         }
 
-        // GET: Employee
+        /// <summary>
+        /// 員工資訊
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Information()
         {
             EmployeeModel model = new EmployeeModel();
-
             model.EmployeeList = _employeeService.GetAllEmployees();
 
             return View(model);
         }
 
+        /// <summary>
+        /// 員工明細
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Detail(int id)
         {
             EmployeeModel model = new EmployeeModel();
-
-            var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<EmployeeDto, EmployeeModel>()
-            );
-            var mapper = config.CreateMapper();
-            var des = mapper.Map<EmployeeModel>(_employeeService.GetEmployee(id));
+            var des = _mapper.Map<EmployeeModel>(_employeeService.GetEmployee(id));
             
             return View(des);
         }
 
+        /// <summary>
+        /// 刪除員工資料
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Delete(int id)
         {
             _employeeService.DeleteEmployee(id);
