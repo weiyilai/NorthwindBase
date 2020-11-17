@@ -48,6 +48,31 @@ namespace NorthwindBase.Service.Employee
         }
 
         /// <summary>
+        /// 新增員工資料
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public bool AddEmployee(EmployeeDto dto)
+        {
+            using (EmployeeRepository employeeRepository = new EmployeeRepository(_dbEntities))
+            {
+                var des = _mapper.Map<Employees>(dto);
+                employeeRepository.Add(des);
+                employeeRepository.SaveChanges();
+
+                var query = employeeRepository.Get(q => q.EmployeeID == des.EmployeeID);
+                if (query.Any())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
         /// 取得指定員工資料
         /// </summary>
         /// <param name="id"></param>

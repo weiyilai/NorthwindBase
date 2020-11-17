@@ -300,6 +300,10 @@
       <Project>{2e4de63c-b15c-47f9-8684-8aa9d720b00e}</Project>
       <Name>NorthwindBase.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NorthwindBase.Utility\NorthwindBase.Utility.csproj">
+      <Project>{b09dafdd-afcc-4393-894a-6805b9eb5fb4}</Project>
+      <Name>NorthwindBase.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

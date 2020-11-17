@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NorthwindBase.Dto.Employee;
 using NorthwindBase.Service.Employee;
+using NorthwindBase.Utility;
 using NorthwindBase.Web.Models.Employee;
 using System;
 using System.Collections.Generic;
@@ -32,10 +33,38 @@ namespace NorthwindBase.Web.Controllers
         /// <returns></returns>
         public ActionResult Information()
         {
-            EmployeeModel model = new EmployeeModel();
+            EmployeeModel model = new EmployeeModel()
+            {
+                ActionMode = ActionType.Query
+            };
             model.EmployeeList = _employeeService.GetAllEmployees();
 
             return View(model);
+        }
+
+        /// <summary>
+        /// 新增員工頁
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Add()
+        {
+            EmployeeModel model = new EmployeeModel()
+            {
+                ActionMode = ActionType.Add
+            };
+            return View("Detail", model);
+        }
+
+        /// <summary>
+        /// 新增員工存檔
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddDetail(EmployeeModel model)
+        {
+            var isSuccess = _employeeService.AddEmployee(model);
+            return Json(new { Result = isSuccess }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -45,9 +74,8 @@ namespace NorthwindBase.Web.Controllers
         /// <returns></returns>
         public ActionResult Detail(int id)
         {
-            EmployeeModel model = new EmployeeModel();
             var des = _mapper.Map<EmployeeModel>(_employeeService.GetEmployee(id));
-            
+            des.ActionMode = ActionType.Edit;
             return View(des);
         }
 
