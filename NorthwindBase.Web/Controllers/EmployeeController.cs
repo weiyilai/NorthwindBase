@@ -50,7 +50,8 @@ namespace NorthwindBase.Web.Controllers
         {
             EmployeeModel model = new EmployeeModel()
             {
-                ActionMode = ActionType.Add
+                ActionMode = ActionType.Add,
+                TitleOfCourtesyDDL = new SelectList(DropDownListHelper.TitleOfCourtesy(), "key", "value")
             };
             return View("Detail", model);
         }
@@ -76,6 +77,7 @@ namespace NorthwindBase.Web.Controllers
         {
             var des = _mapper.Map<EmployeeModel>(_employeeService.GetEmployee(id));
             des.ActionMode = ActionType.Edit;
+            des.TitleOfCourtesyDDL = new SelectList(DropDownListHelper.TitleOfCourtesy(), "key", "value");
             return View(des);
         }
 
