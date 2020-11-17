@@ -1,0 +1,60 @@
+﻿@model NorthwindBase.Web.Models.Employee.EmployeeModel
+
+@using System.IO
+
+@{
+    ViewBag.Title = "員工資訊";
+    var filePath = "~/Scripts/Employee/Employee.js";
+    string modified = File.
+        GetLastWriteTime(Server.MapPath(filePath)).
+        ToString("yyyyMMddHHmmssfff");
+    var jsSrc = $"{filePath}?{modified}";
+}
+
+@section scripts {
+    <script src="@Url.Content(jsSrc)"></script>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Title</th>
+            <th>Title of Courtesy</th>
+            <th>Birth Date</th>
+            <th>Hire Date</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Region</th>
+            <th>Postal Code</th>
+            <th>Country</th>
+            <th>Detail</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EmployeeList)
+        {
+            <tr>
+                <td>@item.EmployeeID</td>
+                <td>@item.LastName</td>
+                <td>@item.FirstName</td>
+                <td>@item.Title</td>
+                <td>@item.TitleOfCourtesy</td>
+                <td>@(item.BirthDate.HasValue ? item.BirthDate.Value.ToString("yyyy/MM/dd") : string.Empty)</td>
+                <td>@(item.HireDate.HasValue ? item.HireDate.Value.ToString("yyyy/MM/dd") : string.Empty)</td>
+                <td>@item.Address</td>
+                <td>@item.City</td>
+                <td>@item.Region</td>
+                <td>@item.PostalCode</td>
+                <td>@item.Country</td>
+                <td>@Html.ActionLink("Detail", "Information", "Employee", new { id = item.EmployeeID }, null)</td>
+                <td>@Html.ActionLink("Delete", null, new { id = item.EmployeeID }, new { id = "Link" + item.EmployeeID.ToString(), href = "javascript:void(0)", onclick = "Delete(" + item.EmployeeID + ")" })</td>
+            </tr>
+        }
+    </tbody>
+</table>

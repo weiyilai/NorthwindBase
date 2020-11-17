@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindBase.Repository.Common
 {
-    public interface ICommonRepository<T>
+    public interface ICommonRepository<T> : IDisposable
     {
         /// <summary>
         /// 新增一筆資料。

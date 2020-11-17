@@ -11,6 +11,7 @@ namespace NorthwindBase.Repository.Common
     public class CommonRepository<TEntity> : ICommonRepository<TEntity>
         where TEntity : class
     {
+        private bool _disposed;
         private DbContext _dbContext { get; set; }
 
         /// <summary>
@@ -80,6 +81,29 @@ namespace NorthwindBase.Repository.Common
         public void Edit(TEntity entity)
         {
             _dbContext.Entry<TEntity>(entity).State = EntityState.Modified;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// 清除此Class的資源。
+        /// </summary>
+        /// <param name="disposing">是否在清理中？</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
+            }
+
+            _disposed = true;
         }
     }
 }

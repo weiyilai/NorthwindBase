@@ -24,7 +24,7 @@ namespace NorthwindBase.Dto.Employee
         public string Extension { get; set; }
         public byte[] Photo { get; set; }
         public string Notes { get; set; }
-        public int ReportsTo { get; set; }
+        public int? ReportsTo { get; set; }
         public string PhotoPath { get; set; }
     }
 }
