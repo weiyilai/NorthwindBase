@@ -18,8 +18,11 @@ namespace NorthwindBase.Service.Employee
         public EmployeeService()
         {
             _mapper = new MapperConfiguration(cfg =>
-                cfg.CreateMap<Employees, EmployeeDto>()
-            ).CreateMapper();
+            {
+                cfg.CreateMap<Employees, EmployeeDto>();
+                cfg.CreateMap<EmployeeDto, Employees>().
+                    ForMember(o => o.EmployeeID, m => m.Ignore());
+            }).CreateMapper();
         }
 
         /// <summary>
@@ -62,6 +65,31 @@ namespace NorthwindBase.Service.Employee
                 else
                 {
                     return new EmployeeDto();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 修改員工資料
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public bool EditEmployee(EmployeeDto dto)
+        {
+            using (EmployeeRepository employeeRepository = new EmployeeRepository(_dbEntities))
+            {
+                var query = employeeRepository.Get(q => q.EmployeeID == dto.EmployeeID);
+                if (query.Any())
+                {
+                    var entity = query.SingleOrDefault();
+                    var des = _mapper.Map(dto, entity);
+                    employeeRepository.Edit(des);
+                    employeeRepository.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
         }

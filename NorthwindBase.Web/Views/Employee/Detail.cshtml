@@ -10,13 +10,14 @@
 }
 
 @section scripts {
+    <script src="~/Scripts/jquery.blockUI.js"></script>
     <script src="@Url.Content(jsSrc)"></script>
 }
 
 <h2>@ViewBag.Title</h2>
 
 <form id="form-Detail">
-
+    @Html.HiddenFor(m => m.EmployeeID)
     <table class="table">
         <tbody>
             <tr>

@@ -52,6 +52,18 @@ namespace NorthwindBase.Web.Controllers
         }
 
         /// <summary>
+        /// 員工明細存檔
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SaveDetail(EmployeeModel model)
+        {
+            var isSuccess = _employeeService.EditEmployee(model);
+            return Json(new { Result = isSuccess }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// 刪除員工資料
         /// </summary>
         /// <param name="id"></param>
