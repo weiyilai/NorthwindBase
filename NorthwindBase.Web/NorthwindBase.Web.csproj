@@ -279,6 +279,16 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NorthwindBase.Dto\NorthwindBase.Dto.csproj">
+      <Project>{59970ed9-2f69-477b-af9a-301a8732779f}</Project>
+      <Name>NorthwindBase.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NorthwindBase.Service\NorthwindBase.Service.csproj">
+      <Project>{2e4de63c-b15c-47f9-8684-8aa9d720b00e}</Project>
+      <Name>NorthwindBase.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
