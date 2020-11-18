@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "員工明細";
-    var filePath = "~/Scripts/Employee/Employee.js";
+    var filePath = "~/Scripts/Employee/Detail.js";
     string modified = File.
         GetLastWriteTime(Server.MapPath(filePath)).
         ToString("yyyyMMddHHmmssfff");
@@ -23,28 +23,26 @@
             width: 16px;
             height: 15px;
         }
+
+        .error-message {
+            padding: 10px 15px;
+            margin: 10px 0 8px 0;
+            border: 1px solid #ebccd1;
+            border-radius: 4px;
+            color: #a94442;
+            background-color: #f2dede;
+            display: block;
+            position: relative;
+        }
     </style>
 }
 
-@section scripts {
+@section scripts {    
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
     <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.min.js"></script>
     <script src="@Url.Content(jsSrc)"></script>
-    <script type="text/javascript">
-        var datePickerConfig = {
-            changeMonth: true,
-            changeYear: true,
-            showOn: 'both',
-            buttonImage: '//jqueryui.com/resources/demos/datepicker/images/calendar.gif',
-            buttonImageOnly: true,
-            buttonText: 'Select date',
-            dateFormat: 'yy/mm/dd',
-            yearRange: '1900:' + (new Date).getFullYear()
-        };
-
-        $('#BirthDate').datepicker(datePickerConfig);
-        $('#HireDate').datepicker(datePickerConfig);
-    </script>
 }
 
 <h2>@ViewBag.Title - @actionModel</h2>
@@ -94,7 +92,7 @@
             </tr>
             <tr>
                 <th>Title of Courtesy</th>
-                <td>@Html.DropDownListFor(m => m.TitleOfCourtesy, Model.TitleOfCourtesyDDL)</td>
+                <td>@Html.DropDownListFor(m => m.TitleOfCourtesy, Model.TitleOfCourtesyDDL, "Please Choose")</td>
             </tr>
             <tr>
                 <th>Birth Date</th>
