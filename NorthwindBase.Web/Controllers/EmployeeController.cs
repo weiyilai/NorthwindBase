@@ -13,15 +13,15 @@ namespace NorthwindBase.Web.Controllers
 {
     public class EmployeeController : Controller
     {
-        private EmployeeService _employeeService;
+        private IEmployeeService _employeeService;
         private IMapper _mapper;
 
         /// <summary>
         /// 建構子
         /// </summary>
-        public EmployeeController()
+        public EmployeeController(IEmployeeService employeeService)
         {
-            _employeeService = new EmployeeService();
+            _employeeService = employeeService;
             _mapper = new MapperConfiguration(cfg =>
                 cfg.CreateMap<EmployeeDto, EmployeeModel>()
             ).CreateMapper();

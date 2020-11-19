@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindBase.Service.Employee
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private NorthwindEntities _dbEntities = new NorthwindEntities();
         private IMapper _mapper;
