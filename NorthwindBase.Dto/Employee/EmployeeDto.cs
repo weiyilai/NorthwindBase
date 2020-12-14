@@ -8,6 +8,9 @@ namespace NorthwindBase.Dto.Employee
 {
     public class EmployeeDto
     {
+        /// <summary>
+        /// 員工編號
+        /// </summary>
         public int EmployeeID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
