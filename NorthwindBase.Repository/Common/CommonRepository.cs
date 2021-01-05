@@ -1,18 +1,25 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using NorthwindBase.Utility;
 
 namespace NorthwindBase.Repository.Common
 {
+    /// <summary>
+    /// 共用存取
+    /// </summary>
     public class CommonRepository<TEntity> : ICommonRepository<TEntity>
         where TEntity : class
     {
         private bool _disposed;
         private DbContext _dbContext { get; set; }
+
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// 建構子 Constructor
@@ -65,6 +72,7 @@ namespace NorthwindBase.Repository.Common
         /// </summary>
         public void SaveChanges()
         {
+            _dbContext.Database.Log = (log) => logger.Info(log);
             _dbContext.SaveChanges();
 
             // 因為Update 單一model需要先關掉validation，因此重新打開

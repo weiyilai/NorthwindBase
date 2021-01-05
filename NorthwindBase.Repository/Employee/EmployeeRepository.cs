@@ -11,6 +11,10 @@ namespace NorthwindBase.Repository.Employee
 {
     public class EmployeeRepository : CommonRepository<Employees>
     {
+        /// <summary>
+        /// 建構子
+        /// </summary>
+        /// <param name="dbContext"></param>
         public EmployeeRepository(DbContext dbContext) : 
             base(dbContext)
         {

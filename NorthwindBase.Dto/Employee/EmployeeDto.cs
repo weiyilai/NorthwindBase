@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NorthwindBase.Dto.Employee
 {
+    /// <summary>
+    /// 員工資料
+    /// </summary>
     public class EmployeeDto
     {
         /// <summary>

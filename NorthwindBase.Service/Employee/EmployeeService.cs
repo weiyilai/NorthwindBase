@@ -15,6 +15,9 @@ namespace NorthwindBase.Service.Employee
         private NorthwindEntities _dbEntities = new NorthwindEntities();
         private IMapper _mapper;
 
+        /// <summary>
+        /// 建構子
+        /// </summary>
         public EmployeeService()
         {
             _mapper = new MapperConfiguration(cfg =>
