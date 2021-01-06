@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using NorthwindBase.Dto.Employee;
 using NorthwindBase.Service.Employee;
-using NorthwindBase.Utility;
+using NorthwindBase.Utility.Helper;
 using NorthwindBase.Web.Models.Employee;
 using System;
 using System.Collections.Generic;

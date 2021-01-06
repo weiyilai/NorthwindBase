@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using NorthwindBase.Utility;
+using System.Diagnostics;
 
 namespace NorthwindBase.Repository.Common
 {
@@ -28,6 +29,12 @@ namespace NorthwindBase.Repository.Common
         public CommonRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
+            _dbContext.Database.Log = (log) =>
+            {
+                Debug.WriteLine(log);
+                logger.Info(log);
+            };
+            // _dbContext.Database.Log = (log) => logger.Info(log);
         }
 
         /// <summary>
@@ -72,7 +79,6 @@ namespace NorthwindBase.Repository.Common
         /// </summary>
         public void SaveChanges()
         {
-            _dbContext.Database.Log = (log) => logger.Info(log);
             _dbContext.SaveChanges();
 
             // 因為Update 單一model需要先關掉validation，因此重新打開

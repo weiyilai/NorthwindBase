@@ -76,6 +76,10 @@
       <Project>{d667e69b-55b2-4694-85d2-63d462c7b2a0}</Project>
       <Name>NorthwindBase.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NorthwindBase.Utility\NorthwindBase.Utility.csproj">
+      <Project>{b09dafdd-afcc-4393-894a-6805b9eb5fb4}</Project>
+      <Name>NorthwindBase.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
