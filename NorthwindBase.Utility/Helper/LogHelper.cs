@@ -17,7 +17,7 @@ namespace NorthwindBase.Utility.Helper
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="param"></param>
-        public static void Write(string sql, DynamicParameters param, string account)
+        public static void Write(string sql, DynamicParameters param, string account, string functional)
         {
             Logger logger = LogManager.GetCurrentClassLogger();
             var list = new Dictionary<string, string>();
@@ -37,7 +37,7 @@ namespace NorthwindBase.Utility.Helper
             });
 
             // logger.Info(content);
-            logger.LogExt(LogLevel.Info, content, account);
+            logger.LogExt(LogLevel.Info, content, account, functional);
         }
     }
 }

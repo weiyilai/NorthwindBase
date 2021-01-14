@@ -123,7 +123,7 @@ namespace NorthwindBase.Service.Employee
                         "Update Employee", Environment.NewLine,
                         "SET FirstName = @FirstName", Environment.NewLine,
                         "WHERE EmployeeID = @EmployeeID"
-                    }), parameters, account);
+                    }), parameters, account, "員工編輯");
 
                     employeeRepository.Edit(des);
                     employeeRepository.SaveChanges();
