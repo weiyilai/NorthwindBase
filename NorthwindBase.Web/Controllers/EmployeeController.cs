@@ -11,6 +11,9 @@ using System.Web.Mvc;
 
 namespace NorthwindBase.Web.Controllers
 {
+    /// <summary>
+    /// 員工
+    /// </summary>
     public class EmployeeController : Controller
     {
         private IEmployeeService _employeeService;
