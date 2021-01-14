@@ -33,6 +33,7 @@ namespace NorthwindBase.Web.Controllers
         /// <returns></returns>
         public ActionResult Information()
         {
+            Session["Account"] = "stevenlai";
             EmployeeModel model = new EmployeeModel()
             {
                 ActionMode = ActionType.Query
@@ -89,7 +90,7 @@ namespace NorthwindBase.Web.Controllers
         [HttpPost]
         public ActionResult SaveDetail(EmployeeModel model)
         {
-            var isSuccess = _employeeService.EditEmployee(model);
+            var isSuccess = _employeeService.EditEmployee(model, Session["Account"].ToString());
             return Json(new { Result = isSuccess }, JsonRequestBehavior.AllowGet);
         }
 

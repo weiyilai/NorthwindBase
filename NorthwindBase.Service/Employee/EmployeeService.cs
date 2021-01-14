@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Dapper;
 using NorthwindBase.Dto.Employee;
 using NorthwindBase.Model.Northwind;
 using NorthwindBase.Repository.Employee;
+using NorthwindBase.Utility.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -103,7 +105,7 @@ namespace NorthwindBase.Service.Employee
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public bool EditEmployee(EmployeeDto dto)
+        public bool EditEmployee(EmployeeDto dto, string account)
         {
             using (EmployeeRepository employeeRepository = new EmployeeRepository(_dbEntities))
             {
@@ -112,8 +114,22 @@ namespace NorthwindBase.Service.Employee
                 {
                     var entity = query.SingleOrDefault();
                     var des = _mapper.Map(dto, entity);
+
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("EmployeeID", des.EmployeeID);
+                    parameters.Add("FirstName", des.FirstName);
+
+                    LogHelper.Write(string.Concat(new object[] {
+                        "Update Employee", Environment.NewLine,
+                        "SET FirstName = @FirstName", Environment.NewLine,
+                        "WHERE EmployeeID = @EmployeeID"
+                    }), parameters, account);
+
                     employeeRepository.Edit(des);
                     employeeRepository.SaveChanges();
+
+                    
+
                     return true;
                 }
                 else

@@ -12,7 +12,7 @@ namespace NorthwindBase.Service.Employee
         List<EmployeeDto> GetAllEmployees();
         bool AddEmployee(EmployeeDto dto);
         EmployeeDto GetEmployee(int id);
-        bool EditEmployee(EmployeeDto dto);
+        bool EditEmployee(EmployeeDto dto, string account);
         void DeleteEmployee(int id);
     }
 }

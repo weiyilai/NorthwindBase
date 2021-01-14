@@ -28,12 +28,7 @@ namespace NorthwindBase.Repository.Common
         /// <param name="dbContext"></param>
         public CommonRepository(DbContext dbContext)
         {
-            _dbContext = dbContext;
-            _dbContext.Database.Log = (log) =>
-            {
-                Debug.WriteLine(log);
-                logger.Info(log);
-            };
+            _dbContext = dbContext;            
             // _dbContext.Database.Log = (log) => logger.Info(log);
         }
 
@@ -79,6 +74,12 @@ namespace NorthwindBase.Repository.Common
         /// </summary>
         public void SaveChanges()
         {
+            _dbContext.Database.Log = (log) =>
+            {
+                Debug.WriteLine(log);
+                logger.WithProperty("UserName", "stevenlai").Trace(log);
+            };
+
             _dbContext.SaveChanges();
 
             // 因為Update 單一model需要先關掉validation，因此重新打開
