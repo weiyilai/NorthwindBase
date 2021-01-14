@@ -11,6 +11,9 @@ namespace NorthwindBase.Dto.Employee
     /// </summary>
     public class EmployeeDto
     {
+        /// <summary>
+        /// ID
+        /// </summary>
         public int EmployeeID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
