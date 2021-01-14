@@ -31,7 +31,13 @@ namespace NorthwindBase.Dto.Employee
         /// 稱謂
         /// </summary>
         public string TitleOfCourtesy { get; set; }
+        /// <summary>
+        /// 生日
+        /// </summary>
         public DateTime? BirthDate { get; set; }
+        /// <summary>
+        /// 僱用日期
+        /// </summary>
         public DateTime? HireDate { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
