@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NorthwindBase
+namespace NorthwindBase.Web.Configurations
 {
-    public class MyDbConfiguration : DbConfiguration
+    public class DatabaseConfiguration : DbConfiguration
     {
-        public MyDbConfiguration()
+        public DatabaseConfiguration()
         {
             SetDatabaseLogFormatter(
                 (context, writeAction) => new OneLineFormatter(context, writeAction));
